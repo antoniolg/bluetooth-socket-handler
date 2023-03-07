@@ -5,10 +5,10 @@ import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.example.navigationcompose.screens.Home
-import com.example.navigationcompose.screens.ScreenA
+import com.example.navigationcompose.screens.home.Home
+import com.example.navigationcompose.screens.screenA.ScreenA
 import com.example.navigationcompose.screens.screenB.ScreenB
-import com.example.navigationcompose.screens.ScreenC
+import com.example.navigationcompose.screens.screenC.ScreenC
 
 
 @Composable

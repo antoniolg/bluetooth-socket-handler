@@ -11,9 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
-@Preview(widthDp = 300, heightDp = 600, showBackground = true)
 @Composable
-fun ScreenC() {
+fun ScreenC(message: String, unLuckyNumber: Int) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -21,6 +20,14 @@ fun ScreenC() {
     ) {
         Text(
             "Screen C",
+            style = MaterialTheme.typography.h4,
+        )
+        Text(
+            message,
+            style = MaterialTheme.typography.h4,
+        )
+        Text(
+            unLuckyNumber.toString(),
             style = MaterialTheme.typography.h4,
         )
         Text(

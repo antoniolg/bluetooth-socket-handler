@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun ScreenB(onNavigate: () -> Unit) {
+fun ScreenB(luckyNumber:Int,onNavigate: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -20,6 +20,10 @@ fun ScreenB(onNavigate: () -> Unit) {
     ) {
         Text(
             "Screen B",
+            style = MaterialTheme.typography.h4,
+        )
+        Text(
+            "Lucky Number: $luckyNumber",
             style = MaterialTheme.typography.h4,
         )
         Button(onClick = onNavigate) {

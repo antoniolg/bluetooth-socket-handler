@@ -9,10 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.navigationcompose.screens.home.HomeViewModel
 
 @Composable
-fun Home(onNavigate: () -> Unit) {
+fun Home(viewModel: HomeViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -22,7 +23,7 @@ fun Home(onNavigate: () -> Unit) {
             "HOME",
             style = typography.h4,
         )
-        Button(onClick = onNavigate) {
+        Button(onClick = { viewModel.navigateToScreenA() }) {
             Text(text = "Go to Screen A")
         }
     }

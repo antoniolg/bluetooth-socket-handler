@@ -5,20 +5,29 @@ import androidx.navigation.navArgument
 
 sealed class NavCommand(
     internal val feature: Feature,
-    private val navArgs: List<NavArg> = emptyList()
+    private val navArgs: List<NavArg> = emptyList(),
+    internal var destinationRoute: String = ""
 ) {
-    class ScreenWithoutArguments(feature: Feature) : NavCommand(feature)
+
+    class ScreenWithoutArguments(feature: Feature) : NavCommand(feature){
+        fun createDestinationRoute() {
+           destinationRoute =  ScreenWithoutArguments(Feature.SCREEN_A).route
+        }
+    }
 
     class ScreenB(feature: Feature) :
         NavCommand(feature, listOf(NavArg.LuckyNumber)) {
-        fun createDestinationRoute(luckyNumber: Int) =
-            "${feature.route}/$luckyNumber"
+        fun createDestinationRoute(luckyNumber: Int) {
+            destinationRoute = "${feature.route}/$luckyNumber"
+        }
     }
 
     class ScreenC(feature: Feature) :
         NavCommand(feature, listOf(NavArg.Message, NavArg.UnLuckyNumber)) {
-        fun createDestinationRoute(message: String, unLuckyNumber: Int) =
-            "${feature.route}/$message/$unLuckyNumber"
+        fun createDestinationRoute(message: String, unLuckyNumber: Int) {
+            destinationRoute = "${feature.route}/$message/$unLuckyNumber"
+        }
+
 
     }
 

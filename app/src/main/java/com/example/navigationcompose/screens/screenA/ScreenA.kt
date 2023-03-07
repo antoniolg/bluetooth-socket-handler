@@ -9,9 +9,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.navigationcompose.screens.screenA.ScreenAViewModel
 
 @Composable
-fun ScreenA(onNavigate: () -> Unit) {
+fun ScreenA(viewModel: ScreenAViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -21,7 +23,7 @@ fun ScreenA(onNavigate: () -> Unit) {
             "Screen A",
             style = MaterialTheme.typography.h4,
         )
-        Button(onClick = onNavigate) {
+        Button(onClick = { viewModel.navigateToScreenB() }) {
             Text(text = "Go to Screen B")
         }
     }

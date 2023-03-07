@@ -1,4 +1,4 @@
-package com.example.navigationcompose.screens
+package com.example.navigationcompose.screens.screenB
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,10 +9,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun ScreenB(luckyNumber:Int,onNavigate: () -> Unit) {
+fun ScreenB(luckyNumber:Int, viewModel: ScreenBViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -26,7 +26,7 @@ fun ScreenB(luckyNumber:Int,onNavigate: () -> Unit) {
             "Lucky Number: $luckyNumber",
             style = MaterialTheme.typography.h4,
         )
-        Button(onClick = onNavigate) {
+        Button(onClick = {viewModel.navigateToScreenC()}) {
             Text(text = "Go to Screen C")
         }
     }

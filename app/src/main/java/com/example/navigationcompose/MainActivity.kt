@@ -14,10 +14,19 @@ import com.example.navigationcompose.bluetooth.EventStatus
 import com.example.navigationcompose.navigation.Navigation
 import com.example.navigationcompose.navigation.NavigationManager
 import com.example.navigationcompose.ui.theme.NavigationComposeTheme
+import com.socketmobile.capture.CaptureError
+import com.socketmobile.capture.android.events.ConnectionStateEvent
+import com.socketmobile.capture.client.CaptureClient
+import com.socketmobile.capture.client.ConnectionState
+import com.socketmobile.capture.client.DataEvent
+import com.socketmobile.capture.client.DeviceClient
 import dagger.hilt.android.AndroidEntryPoint
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.Timer
 import java.util.TimerTask
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -27,6 +36,9 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var bluetoothDataSource: BluetoothDataSource
 
+    // TODO 01
+    // task to simulate the behavior of the bluetooth device, since it is only possible
+    // to receive the events in the mainactivity
     private val timer = Timer()
     private val task = object : TimerTask() {
         override fun run() {
@@ -50,6 +62,43 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     Navigation(navController = navController)
+                }
+            }
+        }
+    }
+
+    //TODO 02 these are the events that are handling the bluetooth events
+    // https://docs.socketmobile.com/capture/java/en/latest/android/getting-started.html#start-capture
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onData(event: DataEvent) {
+        val device: DeviceClient = event.device
+        val data: String = event.data.string
+        // do something with data
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    fun onCaptureServiceConnectionStateChange(event: ConnectionStateEvent) {
+        val state: ConnectionState = event.state
+        val client: CaptureClient = event.client
+        if (state.hasError()) {
+            val error: CaptureError = state.error
+
+            when (error.code) {
+                CaptureError.BLUETOOTH_NOT_ENABLED -> {
+
+                }
+
+                CaptureError.COMPANION_NOT_INSTALLED -> {
+
+
+                }
+                CaptureError.SERVICE_NOT_RUNNING -> {
+
+                }
+
+                CaptureError.UNABLE_TO_PARSE_RESPONSE -> {
+
                 }
             }
         }

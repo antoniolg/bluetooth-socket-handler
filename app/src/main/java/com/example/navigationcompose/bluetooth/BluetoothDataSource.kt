@@ -4,6 +4,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
+// TODO 03 BLUETOOTH DATA SOURCE
+// since it is just a PoC project, repositories are not needed
 @Singleton
 class BluetoothDataSource @Inject constructor() {
     var events = MutableStateFlow(EventStatus.BLUETOOTH_NOT_ENABLED)
